@@ -1,15 +1,15 @@
-<div class="list-groupx mb-1"> 
+<div class="list-groupx mb-1">
     <div class="text-uppercase filter-title">
         {{ __('t.'.$key) }}
     </div>
     @foreach($map as $value => $name)
         <li class="nav-item">
             <a class="nav-link p-0 {{ request($key) === $value ? 'current' : '' }}" href="{{ route('frontend.courses', array_merge(request()->query(), [$key => $value, 'page' => 1])) }}">
-                {{ $name }}
+                {{ $name }} 
             </a>
         </li>
     @endforeach
-    
+
     <!--
     @if(request($key))
         <li class="nav-item">

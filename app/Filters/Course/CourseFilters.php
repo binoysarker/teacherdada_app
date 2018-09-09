@@ -42,20 +42,20 @@ class CourseFilters extends FiltersAbstract
                 'free' => trans('t.free'),
                 'premium' => trans('t.premium')
             ],
-            
+
             'difficulty' => [
                 'beginner' => trans('t.beginner-level'),
                 'intermediate' => trans('t.intermediate-level'),
                 'advanced' => trans('t.advanced-level')
             ],
-            
+
             // 'category' => Category::whereNotNull('parent_id')
             //     ->whereHas('courses', function($q){
             //         $q->where('published', true)
             //             ->where('approved', true);
             //     })->orderBy('name')->get()->pluck('name', 'slug')
             //     ->toArray(),
-                
+
             'language' => Course::all()->pluck('language', 'language'),
            // 'board' => Board::all()->pluck('name', 'name')
            //      ->toArray(),
@@ -65,5 +65,5 @@ class CourseFilters extends FiltersAbstract
      return $map;
     }
 
-    
+
 }

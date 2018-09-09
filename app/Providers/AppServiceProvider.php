@@ -21,6 +21,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot( UrlGenerator $url)
     {
+      /*
+      *Default String length
+      */
+      Schema::defaultStringLength(191);
         /*
          * Application locale defaults for various components
          *
@@ -31,8 +35,8 @@ class AppServiceProvider extends ServiceProvider
          * setLocale for php. Enables ->formatLocalized() with localized values for dates
          */
         setlocale(LC_TIME, config('app.locale_php'));
-        
-        
+
+
         /*
          * setLocale to use Carbon source locales. Enables diffForHumans() localized
          */
@@ -55,22 +59,22 @@ class AppServiceProvider extends ServiceProvider
             $this->app['request']->server->set('HTTPS', false);
             $url->forceScheme('https');
         }
-        
+
         // load settings
         if (Schema::hasTable('admin_settings')) {
             $settings = AdminSettings::first()->toArray();
-            
+
             foreach ($settings as $key => $value) {
                 \Config::set('site_settings.'.$key, $value);
             }
-            
+
             /*
             foreach (App\Setting::all() as $setting) {
                 Config::set('settings.'.$setting->key, $setting->value);
             }*/
         }
-        
-        
+
+
         Validator::extend('no_spaces_allowed', function($attr, $value){
             return preg_match('/^\S*$/u', $value);
         });

@@ -8,33 +8,42 @@ use Illuminate\Database\Eloquent\Builder;
 
 class CategoryFilter extends FilterAbstract
 {
-    
+
     /**
      * Filter by course difficulty.
      *
      * @param  string $access
      * @return Illuminate\Database\Eloquent\Builder
      */
-     
+
     public function filter(Builder $builder, $value)
     {
         $category = Category::where('slug', $value)->first();
-        
+        // dd($category);
+        if ($category->parent_id && $category->sub_parent_id) {
+          return $builder->whereHas('category', function($q) use ($category){
+            $q->where([
+              ['id','=', $category->parent_id],
+              ['parent_id','=', $category->sub_parent_id],
+            ]);
+          });
+        }
         if($category->parent_id){
             return $builder->whereHas('category', function($q) use ($value){
                 $q->where('slug', $value);
             });
-        } else {
+        }
+        else {
             return $builder->whereHas('category', function($q) use ($category){
                 $q->where('parent_id', $category->id);
-            });    
+            });
         }
-        
+
         /*
         return $builder->whereHas('category', function($q) use ($value){
             $q->where('slug', $value);
         });*/
-        
-        
+
+
     }
 }
