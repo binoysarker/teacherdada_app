@@ -29,6 +29,7 @@ class AdminSettings extends Model
         'payment_enable_stripe',
         'payment_enable_braintree',
         'payment_enable_pay_with_account_balance',
+        'payment_enable_pay_with_paytm',
         'payment_enable_omise',
         
         'video_upload_location',

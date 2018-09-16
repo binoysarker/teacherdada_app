@@ -14,7 +14,7 @@ class PaymentController extends Controller
     
     public function checkout(Request $request, Course $course)
     {
-    
+        
         $coupon_code = $request->COUPON;
 
         if(auth()->user()->canAccessCourse($course)){

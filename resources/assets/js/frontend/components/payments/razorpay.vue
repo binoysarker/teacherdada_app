@@ -15,8 +15,8 @@
                     handler: this.handler,
                     theme: {
                         color: "#168AFA"
-                    }
-                    
+                    },
+                    wallet:""
                     
                 },
             }
@@ -50,6 +50,8 @@
 		        $('#razorpay-button').html("<i class='fa fa-gear fa-spin'></i> " + this.trans('t.processing'));
                 var rzp_popup = new Razorpay(this.options);
                 rzp_popup.open();
+                // console.log(rzp_popup);
+                
                 
             }
         }

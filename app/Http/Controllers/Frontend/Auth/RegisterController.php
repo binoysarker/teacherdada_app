@@ -143,12 +143,14 @@ class RegisterController extends Controller
         setting()->set('send_me_helpful_resources', true, $user->id);
         setting()->set('notify_when_new_question_in_my_course', true, $user->id);
         setting()->save($user->id);
-        
         $user->affiliate_id = rand(1011, 221500)*rand(3,100)+rand(3,100);
         $user->country = "India";
         $user->country_code = "+91";
+        // try to change the teacher role to
+        $user->assignRole('author');
+        $user->removeRole('user');
         $user->save();
-        
+        // dd($user);
         // If the user must confirm their email or their account requires approval,
         // create the account but don't log them in.
         if (config('access.users.confirm_email') || config('access.users.requires_approval')) {

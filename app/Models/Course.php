@@ -37,6 +37,11 @@ class Course extends Model
     	return $this->belongsTo(Category::class);
     }
     
+    public function subject()
+    {
+    	return $this->belongsTo(Category::class, 'subject_id','id');
+    }
+    
 
     public function author()
     {

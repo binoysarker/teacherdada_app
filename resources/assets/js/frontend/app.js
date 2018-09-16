@@ -147,6 +147,8 @@ Vue.component('razorpay-form', require('./components/payments/razorpay.vue'));
 Vue.component('razorpay-form-package', require('./components/payments/razorpay-package.vue'));
 Vue.component('razorpay-form-coupon', require('./components/payments/razorpay-500-coupon.vue'));
 Vue.component('razorpay-form-coupon1', require('./components/payments/razorpay-2000-coupon.vue'));
+// paytm section
+Vue.component('paytm-form', require('./components/payments/paytm.vue'));
 
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)

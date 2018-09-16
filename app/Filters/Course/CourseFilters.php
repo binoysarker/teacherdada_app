@@ -13,6 +13,7 @@ use App\Filters\Course\SearchFilter;
 use App\Filters\Course\LanguageFilter;
 use App\Filters\Course\Ordering\SortOrder;
 use App\Filters\Course\DifficultyFilter;
+use App\Filters\Course\SubjectFilter;
 
 use Illuminate\Database\Eloquent\Builder;
 
@@ -24,14 +25,15 @@ class CourseFilters extends FiltersAbstract
      * @var array
      */
     protected $filters = [
-        'category' => CategoryFilter::class,
+        'class' => CategoryFilter::class,
         'access' => AccessFilter::class,
         'difficulty' => DifficultyFilter::class,
         'price' => PriceOrder::class,
         'language' => LanguageFilter::class,
         'sort_order' => SortOrder::class,
         'keyword' => SearchFilter::class,
-        'Board' => BoardFilter::class
+        'board' => BoardFilter::class,
+        'subject' => SubjectFilter::class
     ];
 
     public static function mappings()
@@ -42,20 +44,20 @@ class CourseFilters extends FiltersAbstract
                 'free' => trans('t.free'),
                 'premium' => trans('t.premium')
             ],
-
+            
             'difficulty' => [
                 'beginner' => trans('t.beginner-level'),
                 'intermediate' => trans('t.intermediate-level'),
                 'advanced' => trans('t.advanced-level')
             ],
-
+            
             // 'category' => Category::whereNotNull('parent_id')
             //     ->whereHas('courses', function($q){
             //         $q->where('published', true)
             //             ->where('approved', true);
             //     })->orderBy('name')->get()->pluck('name', 'slug')
             //     ->toArray(),
-
+                
             'language' => Course::all()->pluck('language', 'language'),
            // 'board' => Board::all()->pluck('name', 'name')
            //      ->toArray(),
@@ -65,5 +67,5 @@ class CourseFilters extends FiltersAbstract
      return $map;
     }
 
-
+    
 }

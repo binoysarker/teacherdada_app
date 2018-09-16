@@ -4,6 +4,7 @@ namespace App\Filters\Course;
 use App\Models\Board;
 use App\Filters\FilterAbstract;
 use Illuminate\Database\Eloquent\Builder;
+use App\Models\Category;
 
 class BoardFilter extends FilterAbstract
 {
@@ -19,17 +20,18 @@ class BoardFilter extends FilterAbstract
     public function filter(Builder $builder, $value)
     {
 
-          $board = Board::where('name', $value)->first();
-        
-        if($board->id){
-            return $builder->whereHas('board', function($q) use ($value){
-                $q->where('name', $value);
+        $board = Category::where('slug', $value)->first();
+        // $categories = Category::where('parent_id', $category)->get();
+        if($board->parent_id){
+            return $builder->whereHas('category', function($q) use ($value,$board){
+                $q->where(['slug'=> $value,'parent_id' => $board->parent_id]);
             });
-        } else {
-            return $builder->whereHas('boaerd', function($q) use ($board){
-                $q->where('id', $board->id);
-            });    
-        }
+        } 
+        // else {
+        //     return $builder->whereHas('category', function($q) use ($board){
+        //         $q->where('id', $board->id);
+        //     });    
+        // }
 
 
       //  return $builder->where('board', $value);

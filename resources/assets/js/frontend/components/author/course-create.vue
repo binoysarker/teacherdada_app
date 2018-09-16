@@ -26,6 +26,8 @@
             saveCourse(){
                 this.form.post('/api/author/course')
                     .then(({ data }) => {
+                        // console.log(data);
+                        
                         window.location.href = '/author/course/'+data.slug+'/edit';
                     })
             },

@@ -49,6 +49,7 @@ class AuthorCourseController extends Controller
 
     public function store(Request $request)
     {
+        // return $request->all();
 
     	$this->validate($request, [
             'title' => 'required|max:50',
@@ -66,7 +67,7 @@ class AuthorCourseController extends Controller
             'price' => 0,
             'user_id' => auth()->user()->id,
             'duration' => 0,
-            'subject_id' => $request->childcategory,
+            'subject_id' => $request->childcategory,// here we can get the subject from the category table
 
         ]);
         
